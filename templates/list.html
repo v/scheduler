@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="row">
+        <div class="large-12 columns">
+            <h2> Displaying results for subject {{ subject }}
+                {% if course %} 
+                    and course {{ course }} 
+                {% endif %}
+            </h2>
+
+        {% for item in data %}
+            <div class="row">
+                <div class="large-2 columns">
+                    {{ item.offeringUnitCode }}:{{ item.subject }}:{{ item.courseNumber }}
+                </div>
+                <div class="large-6 columns">
+                    {% if item.expandedTitle %}
+                        {{ item.expandedTitle }}
+                    {% else %}
+                        {{ item.title }}
+                    {% endif %}
+                </div>
+                <div class="large-4 columns">
+                </div>
+            </div>
+            {% for section in item.sections %}
+                <div class="row">
+                    <div class="large-offset-2 large-2 columns">
+                        Section {{ section.number }}
+                    </div>
+                    <div class="large-6 columns">
+                        {% for instructor in section.instructors %}
+                            {{ instructor.name }}                            
+                        {% endfor %}
+
+                        {% for time in section.meetingTimes %}
+                            <div class="row">
+                                <div class="large-6 columns">
+                                    {{ time.meetingDay }}
+                                    {{ time.startTime }} - {{ time.endTime }}
+                                    {{ time.buildingCode }} {{ time.roomNumber }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="large-2 columns">
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
