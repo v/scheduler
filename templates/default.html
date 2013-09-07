@@ -1,0 +1,68 @@
+---
+navigation:
+    - text: Home
+      url: index.html
+    - text: Blog
+      url: blog.html
+    - text: Projects
+      url: projects.html
+    - text: Resume
+      url: //vverma.net/resume.pdf
+    - text: Teaching
+      url: teaching.html
+    - text: Github
+      url: //github.com/v
+title: V's Website
+---
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ page.title }}</title>
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/foundation.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/app.css">
+
+        <script type="text/javascript" src="js/custom.modernizr.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/foundation.min.js"></script>
+
+    </head>
+    <body>
+        <div class="row">
+            <div class="large-12 wrapper columns">
+                <div class="row top-banner">
+                    <div class="large-5 columns">
+                        <hgroup>
+                            <h1> <a href="/"> Vaibhav Verma </a> </h1>
+                            <h3> College Student and Hacker </h3>
+                        </hgroup>
+                    </div>
+                    <div class="large-7 columns">
+                        <ul class="button-group my-nav">
+                        {% for link in page.navigation %}
+                            {% if page.url contains link.url %}
+                            <li class="active">
+                            {% else %}
+                            <li> 
+                            {% endif %}
+                                <a href="{{ link.url }}"> {{ link.text }} </a> 
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+                {{ content }}
+            </div>
+        </div>
+    </body>
+</html>
