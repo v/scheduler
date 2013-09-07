@@ -3,8 +3,9 @@ $(function() {
         'source': function(request, response) {
             var term = request.term;
 
+
             var results = autocomplete(window.json, term);
-            response(results)
+            console.log(results)
             response(_.map(results, function(item) {
                 if(item.course) {
                     item.value = window.json['ids'][item.subj]['courses'][item.course]

@@ -6,8 +6,7 @@ app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 @app.route('/')
 def home():
-    data = requests.get('https://rumobile.rutgers.edu/1/indexes/92013_NB_U.json').json()
-    return render_template('index.html.jade', json=json.dumps(data))
+    return render_template('index.html.jade')
 
 @app.route('/list')
 def list():
