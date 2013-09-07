@@ -1,33 +1,36 @@
 div.course {
-    margin-bottom: 10px;
-    padding: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 div.row.section {
-    padding: 5px;
-    border: 1px solid black;
+  padding: 5px;
+  border: 1px solid black;
 }
 
 div.row.meeting {
-    margin-bottom: 2px;
+  margin-bottom: 2px;
 }
 
-svg.rectangle {
-    margin-right: 5px;
+.rectangle {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
 }
 
-rect.liv {
-    fill: blue;
+.rectangle.liv {
+  background-color: blue;
 }
 
-rect.cac {
-    fill: yellow;
+.rectangle.cac {
+  background-color: yellow;
 }
 
-rect.bus {
-    fill: purple;
+.rectangle.bus {
+  background-color: purple;
 }
 
-rect.dc {
-    fill: green;
+.rectangle.dc {
+  background-color: green;
 }

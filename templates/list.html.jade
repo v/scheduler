@@ -1,0 +1,45 @@
+extends 'layout.html.jade'
+block body
+  .row
+    .large-12.small-12.columns
+      h2
+        | Displaying results for subject #{subject}
+        if course
+          | and course #{course}
+
+      for item in data
+        .course
+          .row.title
+            .large-2.small-3.columns #{item.offeringUnitCode}:#{item.subject}:#{item.courseNumber}
+            .large-10.small-9.columns">
+              if item.expandedTitle
+                = item.expandedTitle
+              else
+                = item.title
+          for section in item.sections
+            .section.row
+              .large-2.small-3.columns
+                | Section #{section.number}
+              .large-6.small-6.columns
+                for time in section.meetingTimes
+                  .row.meeting
+                    if time.meetingDay and time.startTime and time.endTime
+                      .large-1.small-1.columns= time.meetingDay | title
+                      .large-4.small-6.columns #{time.startTime} - #{time.endTime}
+                    else
+                      .large-5.small-7.columns
+                        i By Arrangement
+                    .large-4.small-3.columns
+                      .hide-for-small.left
+                        .rectangle(class=time.campusAbbrev | replace("/", "") | lower)
+
+                      if time.buildingCode and time.roomNumber
+                        | #{time.buildingCode} #{time.roomNumber}
+                      else
+                        i None
+                    .large-3.hide-for-small.columns
+                      if time.meetingModeDesc != 'LEC'
+                        = time.meetingModeDesc | title
+              .large-3.small-4.columns.text-right
+                for instructor in section.instructors
+                  = instructor.name | title

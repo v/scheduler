@@ -2,11 +2,12 @@ from flask import Flask, render_template, request
 import requests, json
 
 app = Flask(__name__)
+app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 @app.route('/')
 def home():
     data = requests.get('https://rumobile.rutgers.edu/1/indexes/92013_NB_U.json').json()
-    return render_template('index.html', json=json.dumps(data))
+    return render_template('index.html.jade', json=json.dumps(data))
 
 @app.route('/list')
 def list():
@@ -38,7 +39,7 @@ def list():
     else:
         return 'You done goofed'
 
-    return render_template('list.html', data=result,
+    return render_template('list.html.jade', data=result,
             subject=subject,
             course=course)
 

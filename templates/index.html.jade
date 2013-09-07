@@ -1,0 +1,11 @@
+extends 'layout.html.jade'
+block head
+  script(type="text/javascript")
+    window.json = {{ json | safe }};
+block body
+  .row
+    .large-12.columns.text-center
+      h1 Scheduler
+        .container
+          form(action='', id='scheduler')
+            input.search-bar.typeahead.tt-query(type='text', placeholder='Look up a course')
