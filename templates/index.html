@@ -18,16 +18,26 @@
         <script type="text/javascript" src="/static/js/custom.modernizr.js"></script>
         <script type="text/javascript" src="/static/js/jquery.js"></script>
         <script type="text/javascript" src="/static/js/foundation.min.js"></script>
+        <script type="text/javascript" src="/static/js/typeahead.min.js"></script>
+        <script type="text/javascript" src="/static/js/underscore.min.js"></script>
+
+        <script type="text/javascript" src="/static/js/autocomplete.js"></script>
+        <script type="text/javascript">
+            window.json = {{ json | safe }};
+        </script>
+
+        <script type="text/javascript" src="/static/js/app.js"></script>
 
     </head>
     <body>
         <div class="row">
-            <div class="large-12 columns">
+            <div class="large-12 columns text-center">
                 <h1> Scheduler </h1>
-                <form action="" id="scheduler">
-                    <input type="text" class="search-bar" placeholder="Look up a Course" />
-                </form>
-                <input type="submit" class="button" value="Search" />
+                <div class="container">
+                    <form action="" id="scheduler">
+                        <input type="text" class="search-bar typeahead tt-query" placeholder="Look up a Course" />
+                    </form>
+                </div>
             </div>
         </div>
     </body>
