@@ -15,7 +15,7 @@ def list():
         data = requests.get('http://sis.rutgers.edu/soc/course.json', params={
             'campus': 'NB',
             'semester': '92013',
-            'level': 'U,G', 
+            'level': 'U,G',
             'subject': request.args['subj'],
             'courseNumber': request.args['course'],
         }).json()
@@ -28,7 +28,7 @@ def list():
         data = requests.get('http://sis.rutgers.edu/soc/courses.json', params={
             'campus': 'NB',
             'semester': '92013',
-            'level': 'U,G', 
+            'level': 'U,G',
             'subject': request.args['subj'],
         }).json()
 
@@ -38,7 +38,7 @@ def list():
     else:
         return 'You done goofed'
 
-    return render_template('list.html', data=result, 
+    return render_template('list.html', data=result,
             subject=subject,
             course=course)
 

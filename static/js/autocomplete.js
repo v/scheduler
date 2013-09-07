@@ -108,7 +108,7 @@ function autocomplete (index, query) {
     matches = matches.concat(_.map(temp, function (item) {
       return {subj: item};
     }));
-  } 
+  }
 
   // Search subject abbreviations
   if (index.abbrevs[query.toUpperCase()]) {
