@@ -3,7 +3,6 @@ $(function() {
         'source': function(request, response) {
             var term = request.term;
 
-
             var results = autocomplete(window.json, term);
             console.log(results)
             response(_.map(results, function(item) {
