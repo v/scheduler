@@ -1,7 +1,22 @@
 {% extends 'layout.html' %}
 {% block head %}
     <script type="text/javascript">
-        window.json = {{ json | safe }};
+        var yurl = 'https://query.yahooapis.com/v1/public/yql';
+        var url = 'https://rumobile.rutgers.edu/1/indexes/92013_NB_U.json';
+
+        $.ajax({
+            'url': yurl,
+            'data': {
+                'q': 'SELECT * FROM json WHERE url="'+url+'"',
+                'format': 'json',
+                'jsonCompat': 'new',
+            },
+            'dataType': 'jsonp',
+            'success': function(response) {
+                window.json = response.query.results.json;
+                console.log('Successfully loaded data from rutgers')
+            },
+        });
     </script>
 {% endblock %}
 {% block body %}

@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    data = requests.get('https://rumobile.rutgers.edu/1/indexes/92013_NB_U.json').json()
-    return render_template('index.html', json=json.dumps(data))
+    #data = requests.get('https://rumobile.rutgers.edu/1/indexes/92013_NB_U.json').json()
+    return render_template('index.html')
 
 @app.route('/list')
 def list():
