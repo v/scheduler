@@ -21,6 +21,9 @@ block body
   .row
     .large-12.columns.text-center
       h1 Scheduler
-        .container
-          form(action='', id='scheduler')
-            input.search-bar.typeahead.tt-query(type='text', placeholder='Look up a course')
+      h3 Pick your campus
+      button.button.campus(value="NB") New Brunswick
+      button.button.campus(value="NK") Newark
+      button.button.campus(value="CM") Camden
+      form(action='', id='scheduler')
+        input.search-bar.typeahead.tt-query(type='text', placeholder='Look up a course')
