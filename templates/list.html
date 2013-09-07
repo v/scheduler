@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block body %}
     <div class="row">
-        <div class="large-12 columns">
+        <div class="large-12 small-12 columns">
             <h2> Displaying results for subject {{ subject }}
                 {% if course %} 
                     and course {{ course }} 
@@ -9,44 +9,68 @@
             </h2>
 
         {% for item in data %}
-            <div class="row">
-                <div class="large-2 columns">
-                    {{ item.offeringUnitCode }}:{{ item.subject }}:{{ item.courseNumber }}
-                </div>
-                <div class="large-6 columns">
-                    {% if item.expandedTitle %}
-                        {{ item.expandedTitle }}
-                    {% else %}
-                        {{ item.title }}
-                    {% endif %}
-                </div>
-                <div class="large-4 columns">
-                </div>
-            </div>
-            {% for section in item.sections %}
-                <div class="row">
-                    <div class="large-offset-2 large-2 columns">
-                        Section {{ section.number }}
+            <div class="course">
+                <div class="row title">
+                    <div class="large-2 small-3 columns">
+                        {{ item.offeringUnitCode }}:{{ item.subject }}:{{ item.courseNumber }}
                     </div>
-                    <div class="large-6 columns">
-                        {% for instructor in section.instructors %}
-                            {{ instructor.name }}                            
-                        {% endfor %}
+                    <div class="large-10 small-9 columns">
+                        {% if item.expandedTitle %}
+                            {{ item.expandedTitle }}
+                        {% else %}
+                            {{ item.title }}
+                        {% endif %}
+                    </div>
+                </div>
+                {% for section in item.sections %}
+                    <div class="section row">
+                        <div class="large-2 small-3 columns">
+                            Section {{ section.number }}
+                        </div>
+                        <div class="large-6 small-6 columns">
+                            {% for time in section.meetingTimes %}
+                                <div class="row meeting">
+                                    {% if time.meetingDay and time.startTime and time.endTime %}
+                                        <div class="large-1 small-1 columns">
+                                            {{ time.meetingDay | title }}
+                                        </div>
+                                        <div class="large-4 small-6 columns">
+                                            {{ time.startTime }} - {{ time.endTime }}
+                                        </div>
+                                    {% else %}
+                                        <div class="large-5 small-7 columns">
+                                            <i> By Arrangement </i>
+                                        </div>
+                                    {% endif %}
+                                    <div class="large-4 small-3 columns">
+                                        <div class="hide-for-small left">
+                                            <svg class="rectangle" width="20" height="20">
+                                            <rect x="0" y="0" width="20" height="20" stroke="black" stroke-width="2" class="{{ time.campusAbbrev | replace("/","") | lower }}" />
+                                            </svg>
+                                        </div>
 
-                        {% for time in section.meetingTimes %}
-                            <div class="row">
-                                <div class="large-6 columns">
-                                    {{ time.meetingDay }}
-                                    {{ time.startTime }} - {{ time.endTime }}
-                                    {{ time.buildingCode }} {{ time.roomNumber }}
+                                        {% if time.buildingCode and time.roomNumber %}
+                                            {{ time.buildingCode }} {{ time.roomNumber }}
+                                        {% else %}
+                                            <i> None </i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="large-3 hide-for-small columns">
+                                        {% if time.meetingModeDesc != 'LEC' %}
+                                            {{ time.meetingModeDesc | title }}
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
+                        <div class="large-3 small-4 columns text-right">
+                            {% for instructor in section.instructors %}
+                                {{ instructor.name | title }}                            
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="large-2 columns">
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         {% endfor %}
         </div>
     </div>
