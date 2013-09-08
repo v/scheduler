@@ -34,3 +34,7 @@ div.row.meeting {
 .rectangle.dc {
   background-color: green;
 }
+
+#scheduler {
+  display: none;
+}
