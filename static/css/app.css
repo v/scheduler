@@ -73,8 +73,12 @@ li.ui-menu-item a.result-type {
 }
 
 .section .meetingTime {
-    padding: 0 1em;
-    margin-top: .5em;
+  padding: 0 1em;
+  margin-top: .5em;
+}
+
+footer {
+  margin: 1em 0;
 }
 
 @media (min-width: 992px) {
