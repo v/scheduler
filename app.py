@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request
-import requests, json
+import requests, json, pyjade
 
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
+
+@app.template_filter('timefix')
+def timefix_filter(time):
+  time = time[:2] + ':' + time[2:]
+  return time.lstrip('0')
 
 @app.route('/')
 def home():
@@ -15,7 +20,7 @@ def list():
 
     if 'course' in request.args:
         if 'subj' not in request.args:
-            return 'You need a subject and a course number', 400    
+            return 'You need a subject and a course number', 400
         data = requests.get('http://sis.rutgers.edu/soc/course.json', params={
             'campus': request.args['campus'],
             'semester': '92013',

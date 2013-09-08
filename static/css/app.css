@@ -1,22 +1,9 @@
 div.course {
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
-div.row.section {
-  padding: 5px;
-  border: 1px solid black;
+  margin-top: 3em;
 }
 
 div.row.meeting {
   margin-bottom: 2px;
-}
-
-.rectangle {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
 }
 
 .rectangle.liv {
@@ -33,6 +20,10 @@ div.row.meeting {
 
 .rectangle.dc {
   background-color: green;
+}
+
+.label-primary {
+  background-color: purple;
 }
 
 #scheduler {
@@ -75,4 +66,19 @@ li.ui-menu-item a.result-type {
   font-style: italic;
   font-size: 14px;
   line-height: 20px;
+}
+
+.section {
+  margin-top: 2em;
+}
+
+.section .meetingTime {
+    padding: 0 1em;
+    margin-top: .5em;
+}
+
+@media (min-width: 992px) {
+  .section .meetingTime:not(:last-child) {
+    border-right: 2px black solid;
+  }
 }
