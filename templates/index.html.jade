@@ -4,8 +4,8 @@ block body
     .large-12.columns.text-center
       h1 Scheduler
       h3 Pick your campus
-      button.button.campus(value="NB") New Brunswick
-      button.button.campus(value="NK") Newark
-      button.button.campus(value="CM") Camden
-      form(action='', id='scheduler')
-        input.search-bar.typeahead.tt-query(type='text', placeholder='Look up a course')
+      div.btn-group
+        button.btn.btn-primary.campus(value="NB") New Brunswick
+        button.btn.btn-primary.campus(value="NK") Newark
+        button.btn.btn-primary.campus(value="CM") Camden
+      include searchbar.html.jade

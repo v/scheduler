@@ -34,8 +34,8 @@ $(function() {
 
   function selectCampus(campus) {
     window.localStorage.setItem('campus', campus);
-    $('.campus').removeClass('disabled');
-    $('button.campus[value="'+campus+'"]').addClass('disabled');
+    $('.campus').removeClass('active');
+    $('button.campus[value="'+campus+'"]').addClass('active');
     $('#scheduler').show();    
     loadCampusData(campus)
   }
@@ -80,5 +80,12 @@ $(function() {
       params.campus = window.localStorage.getItem('campus');
       window.location.href = '/list?' + $.param(params);
     }
-  });
+  }).data('ui-autocomplete')._renderItem = function(ul, item) {
+    var li = $('<li class="result"></li>');
+    li.append('<p class="result-title">' + item.value + ' Herping</p>')
+    li.append('<p class="result-type"> Department </p>')
+    li.append('<p class="result-code"> 198:111:01 </p>')
+    li.appendTo(ul);
+    return ul;
+  };
 });

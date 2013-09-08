@@ -38,3 +38,33 @@ div.row.meeting {
 #scheduler {
   display: none;
 }
+
+div.btn-group {
+  margin-bottom: 15px;
+}
+
+li.result {
+  height: 50px;
+  padding: 8px 20px;
+  width: 300px;
+  white-space: nowrap;
+}
+
+li.result .result-code {
+  float: right;
+}
+
+li.result p {
+  display: inline;
+}
+
+li.result .result-title {
+  font-weight: bold;
+}
+
+li.result .result-type {
+}
+
+ul.ui-autocomplete.ui-widget-content {
+  background-color: white;
+}
