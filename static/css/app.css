@@ -43,28 +43,35 @@ div.btn-group {
   margin-bottom: 15px;
 }
 
-li.result {
-  height: 50px;
-  padding: 8px 20px;
-  width: 300px;
-  white-space: nowrap;
-}
-
-li.result .result-code {
-  float: right;
-}
-
-li.result p {
-  display: inline;
-}
-
-li.result .result-title {
-  font-weight: bold;
-}
-
-li.result .result-type {
-}
-
 ul.ui-autocomplete.ui-widget-content {
   background-color: white;
+}
+
+input[type="text"].search-bar {
+  width: 400px;
+  font-size: 24px;
+}
+
+.ui-menu li.ui-menu-item {
+  display: block;
+  font-size: 20px;
+  padding: 4px;
+}
+
+li.ui-menu-item .ui-state-focus {
+  background: none;
+  border: none;
+  pointer-events: cursor;
+  color: inherit;
+}
+
+li.ui-menu-item:hover {
+  background: #0097cf;
+  color: white;
+}
+
+li.ui-menu-item a.result-type {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 20px;
 }

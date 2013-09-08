@@ -48,6 +48,10 @@ $(function() {
     selectCampus($(this).val());
   });
 
+  $('.search-bar').on('focus', function(){
+    $(this).autocomplete('search', $(this).val());
+  });
+
   $('.search-bar').autocomplete({
     'source': function(request, response) {
       var term = request.term;
@@ -78,14 +82,19 @@ $(function() {
         params.subj = ui.item.subj;
       }
       params.campus = window.localStorage.getItem('campus');
+      params.q = $('.search-bar').val();
       window.location.href = '/list?' + $.param(params);
     }
-  }).data('ui-autocomplete')._renderItem = function(ul, item) {
-    var li = $('<li class="result"></li>');
-    li.append('<p class="result-title">' + item.value + ' Herping</p>')
-    li.append('<p class="result-type"> Department </p>')
-    li.append('<p class="result-code"> 198:111:01 </p>')
-    li.appendTo(ul);
-    return ul;
+  })
+  .data('ui-autocomplete')._renderItem = function(ul, item) {
+    var li = $('<li class="ui-menu-item row"></li>');
+    var type = 'Department '+item.subj;
+    if(item.subj && item.course) {
+      type = 'Course '+item.subj+':'+item.course;
+    }
+
+    return li.append('<a class="result-title ui-corner-all col-lg-7">'+item.value+'</a>')
+      .append('<a class="result-type col-lg-5 text-right"> '+type+' </a>')
+      .appendTo(ul);
   };
 });
