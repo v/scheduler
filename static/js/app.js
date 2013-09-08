@@ -1,5 +1,9 @@
 $(function() {
   window.json = {};
+  if(window.localStorage.getItem('json')) {
+    window.json = JSON.parse(window.localStorage.getItem('json'));
+  }
+
   function loadCampusData(campus) {
     /* campus is one of NB NK CM */
     function loadUrl(url, campus, level) {
@@ -14,21 +18,27 @@ $(function() {
         },
         'dataType': 'jsonp',
         'success': function(response) {
+          console.log('Successfully got data from JSON');
           if(!window.json[campus]) {
             window.json[campus] = response.query.results.json;
           } else {
             $.extend(true, window.json[campus], response.query.results.json);
           }
+
+          var tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+
+          window.json[campus].expiration = tomorrow;
+          window.localStorage.setItem('json', JSON.stringify(window.json));
         },
       });
-
     }
     var base_url = 'https://rumobile.rutgers.edu/1/indexes/92013';
 
-    // if we haven't already loaded the data.
-    if(!window.json[campus] || !window.json[campus]['U'])
+    // if we haven't already loaded the data or if it's expired.
+    if(!window.json[campus] || window.json[campus].expiration < new Date())
       loadUrl(base_url + '_' + campus + '_U.json', campus, 'U')
-    if(!window.json[campus] || !window.json[campus]['G'])
+    if(!window.json[campus] || window.json[campus].expiration < new Date())
       loadUrl(base_url + '_' + campus + '_G.json', campus, 'G')
   }
 
@@ -36,10 +46,10 @@ $(function() {
     window.localStorage.setItem('campus', campus);
     $('.campus').removeClass('active');
     $('button.campus[value="'+campus+'"]').addClass('active');
-    $('#scheduler').show();    
+    $('#scheduler').show();
     loadCampusData(campus)
   }
-
+  //friendship is magic
   if(window.localStorage.getItem('campus')) {
     selectCampus(window.localStorage.getItem('campus'));
   }
@@ -51,11 +61,11 @@ $(function() {
   $('.search-bar').on('focus', function(){
     $(this).autocomplete('search', $(this).val());
   });
-
+  //power of the ponies
   $('.search-bar').autocomplete({
     'source': function(request, response) {
       var term = request.term;
-      
+
       var courses = window.json[window.localStorage.getItem('campus')];
 
       var results = autocomplete(courses, term);
