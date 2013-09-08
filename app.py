@@ -10,10 +10,14 @@ def home():
 
 @app.route('/list')
 def list():
+    if 'campus' not in request.args:
+        return 'You need a campus', 400
+
     if 'course' in request.args:
-        assert 'subj' in request.args
+        if 'subj' not in request.args:
+            return 'You need a subject and a course number', 400    
         data = requests.get('http://sis.rutgers.edu/soc/course.json', params={
-            'campus': 'NB',
+            'campus': request.args['campus'],
             'semester': '92013',
             'level': 'U,G',
             'subject': request.args['subj'],
@@ -26,7 +30,7 @@ def list():
 
     elif 'subj' in request.args:
         data = requests.get('http://sis.rutgers.edu/soc/courses.json', params={
-            'campus': 'NB',
+            'campus': request.args['campus'],
             'semester': '92013',
             'level': 'U,G',
             'subject': request.args['subj'],
@@ -36,7 +40,7 @@ def list():
         subject = request.args['subj']
         course = ""
     else:
-        return 'You done goofed'
+        return 'You need a subj parameter dood', 400
 
     return render_template('list.html.jade', data=result,
             subject=subject,
