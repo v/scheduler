@@ -1,7 +1,8 @@
 extends 'layout.html.jade'
 block body
   .row
-    .large-12.small-12.columns
+    .col-md-12
+      include "searchbar.html.jade"
       h2
         | Displaying results for subject #{subject}
         if course
