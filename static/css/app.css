@@ -86,3 +86,18 @@ footer {
     border-right: 2px black solid;
   }
 }
+
+div.action-buttons {
+  margin: 5px;
+}
+
+span.section-status {
+  font-size: 18px;
+  line-height: 19px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+h4.section-title {
+  padding: 0;
+}

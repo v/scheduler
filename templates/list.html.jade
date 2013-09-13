@@ -5,21 +5,18 @@ extends 'layout.html.jade'
 block body
   .row
     .col-md-6.col-md-offset-3.text-center
-      h1 Scheduler
+      h1
+        a(href="/") Scheduler
       include searchbar.html.jade
   .row
     .col-md-12
       h2
         | Results for
         i #{request.args.q}
-        // | Displaying results for subject #{subject}
-        // if course
-        //   | and course #{course}
 
       for item in data
         .course.clearfix
           h3
-            //.large-2.small-3.columns #{item.offeringUnitCode}:#{item.subject}:#{item.courseNumber}
             if item.courseNumber
               = item.courseNumber
               &nbsp;&mdash;
@@ -30,13 +27,20 @@ block body
 
           for section in item.sections
             if section.printed == 'Y'
-              .section.clearfix
-                h4
-                  | Section #{section.number}
-                  if section.instructors
-                    | &mdash;
-                  for instructor in section.instructors
-                    = instructor.name | title
+              .section.clearfix.row
+                .col-md-12.clearfix
+                  h4.col-md-4.section-title
+                    | Section #{section.number}
+                    if section.instructors
+                      | &mdash;
+                    for instructor in section.instructors
+                      = instructor.name | title
+                  span.col-md-2.section-status
+                    if section.openStatus
+                      span.label.label-success Open
+                    else
+                      span.label.label-danger Closed
+
                 for time in section.meetingTimes
                   .col-md-3.meetingTime
                     span.glyphicon.glyphicon-time
@@ -57,3 +61,9 @@ block body
                     .label(class=l)= time.campusAbbrev
 
                     .large-3.hide-for-small.columns
+
+              .action-buttons
+                if section.openStatus
+                  a.btn.btn-success(href="https://sims.rutgers.edu/webreg/editSchedule.htm?login=cas&semesterSelection=92013&indexList=#{section.index}", target="_blank") Register
+                elif request.args.campus == 'NB'
+                  a.btn.btn-info(href="http://sniper.vverma.net/?subject=#{item.subject}&course_number=#{item.courseNumber}&section=#{section.number}", target="_blank") Snipe
