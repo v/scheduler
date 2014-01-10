@@ -23,7 +23,7 @@ def list():
             return 'You need a subject and a course number', 400
         data = requests.get('http://sis.rutgers.edu/soc/course.json', params={
             'campus': request.args['campus'],
-            'semester': '92013',
+            'semester': '12014',
             'level': 'U,G',
             'subject': request.args['subj'],
             'courseNumber': request.args['course'],
@@ -36,7 +36,7 @@ def list():
     elif 'subj' in request.args:
         data = requests.get('http://sis.rutgers.edu/soc/courses.json', params={
             'campus': request.args['campus'],
-            'semester': '92013',
+            'semester': '12014',
             'level': 'U,G',
             'subject': request.args['subj'],
         }).json()
