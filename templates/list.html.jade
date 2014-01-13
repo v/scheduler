@@ -18,12 +18,12 @@ block body
         .course.clearfix
           h3
             if item.courseNumber
-              = item.courseNumber
+              #{item.courseNumber | title}
               &nbsp;&mdash;
             if item.expandedTitle
-              = item.expandedTitle | title
+              #{item.expandedTitle | title}
             else
-              = item.title | title
+              #{item.title | title}
 
           for section in item.sections
             if section.printed == 'Y'
@@ -34,7 +34,7 @@ block body
                     if section.instructors
                       | &mdash;
                     for instructor in section.instructors
-                      = instructor.name | title
+                      #{instructor.name | title}
                   span.col-md-2.section-status
                     if section.openStatus
                       span.label.label-success Open
@@ -49,7 +49,7 @@ block body
                     else
                       i &nbsp;By Arrangement
                     if time.meetingModeDesc != 'LEC'
-                      | (#{time.meetingModeDesc | title})
+                      | (#{time.meetingModeDesc})
                     br
                     if time.buildingCode and time.roomNumber
                       span.glyphicon.glyphicon-map-marker

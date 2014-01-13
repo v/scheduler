@@ -33,7 +33,9 @@ $(function() {
         },
       });
     }
-    var base_url = 'https://rumobile.rutgers.edu/1/indexes/92013';
+
+    var SEMESTER = '12014';
+    var base_url = 'https://rumobile.rutgers.edu/1/indexes/' + SEMESTER;
 
     // if we haven't already loaded the data or if it's expired.
     if(!window.json[campus] || window.json[campus].expiration < new Date())

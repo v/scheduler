@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import requests, json, pyjade
 
+SEMESTER = '12014'
+
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
@@ -23,7 +25,7 @@ def list():
             return 'You need a subject and a course number', 400
         data = requests.get('http://sis.rutgers.edu/soc/course.json', params={
             'campus': request.args['campus'],
-            'semester': '92013',
+            'semester': SEMESTER,
             'level': 'U,G',
             'subject': request.args['subj'],
             'courseNumber': request.args['course'],
@@ -36,7 +38,7 @@ def list():
     elif 'subj' in request.args:
         data = requests.get('http://sis.rutgers.edu/soc/courses.json', params={
             'campus': request.args['campus'],
-            'semester': '92013',
+            'semester': SEMESTER,
             'level': 'U,G',
             'subject': request.args['subj'],
         }).json()
